@@ -1,0 +1,55 @@
+name: Go
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+
+      - name: Build
+        run: go build -v -o ./build main.go
+
+      - name: Test
+        run: go test -v ./...
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: ./
+
+      - name: load on server
+        uses: appleboy/scp-action@v0.1.1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: "./build"
+          target: "/opt/almost_status/build"
+
+      - name: restart service
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: ./restart_almost_status.sh
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME}}
+          password: ${{ secrets.PASSWORD }}
+
+
+
+
+
+
+
