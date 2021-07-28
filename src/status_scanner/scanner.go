@@ -46,7 +46,7 @@ func (s *Scanner) asyncStart(groupID int, chatID int) error {
 		status := new(pkg.AlmostStatus)
 		for _, profile := range response.Profiles {
 			if profile.Online {
-				status.Users = append(status.Users, profile.ID)
+				status.Users = append(status.Users, int64(profile.ID))
 			}
 		}
 		_, err = s.repo.Create(status)

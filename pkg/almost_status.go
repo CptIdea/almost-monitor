@@ -1,8 +1,11 @@
 package pkg
 
-import "gorm.io/gorm"
+import (
+	"github.com/lib/pq"
+	"gorm.io/gorm"
+)
 
 type AlmostStatus struct {
 	gorm.Model
-	Users []int
+	Users pq.Int64Array
 }
