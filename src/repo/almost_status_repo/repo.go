@@ -2,6 +2,7 @@ package almost_status_repo
 
 import (
 	"almost-monitor/pkg"
+	"fmt"
 	"gorm.io/gorm"
 	"time"
 )
@@ -11,10 +12,10 @@ type almostStatusRepo struct {
 }
 
 func NewAlmostStatusRepo(db *gorm.DB) (AlmostStatusRepo, error) {
-	//err := db.AutoMigrate(&pkg.AlmostStatus{})
-	//if err != nil {
-	//	return nil, fmt.Errorf("ошибка автомиграции: %w", err)
-	//}
+	err := db.AutoMigrate(&pkg.AlmostStatus{})
+	if err != nil {
+		return nil, fmt.Errorf("ошибка автомиграции: %w", err)
+	}
 	return &almostStatusRepo{db: db}, nil
 }
 
