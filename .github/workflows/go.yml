@@ -7,11 +7,11 @@ on:
     branches: [ master ]
 
 jobs:
-  linter:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v2.5.2
+#  linter:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Run golangci-lint
+#        uses: golangci/golangci-lint-action@v2.5.2
 
   build:
     runs-on: ubuntu-latest
