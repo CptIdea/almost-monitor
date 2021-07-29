@@ -34,6 +34,7 @@ func (s *StatusNotificator) asyncStart(groupID int, chatID int) error {
 	ticker := time.NewTicker(24 * time.Hour)
 	tickerChan := ticker.C
 	errCounter := 0
+	<-tickerChan
 	for {
 		if errCounter > 10 {
 			return fmt.Errorf("слишком много ошибок. выход")
@@ -68,7 +69,6 @@ func (s *StatusNotificator) asyncStart(groupID int, chatID int) error {
 			log.Printf("ошибка получения статусов: %s", err)
 			continue
 		}
-
 		<-tickerChan
 	}
 }
