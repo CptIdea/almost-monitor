@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"github.com/SevereCloud/vksdk/v2/api"
 	"github.com/SevereCloud/vksdk/v2/api/params"
+	"sync"
 )
 
 type NameCache struct {
 	vk    *api.VK
 	cache map[int64]string
+	mu    sync.Mutex
 }
 
 func NewNameCache(vk *api.VK) *NameCache {
@@ -16,6 +18,8 @@ func NewNameCache(vk *api.VK) *NameCache {
 }
 
 func (n *NameCache) GetUserName(ID int64) string {
+	n.mu.Lock()
+	defer n.mu.Unlock()
 	if ans, ok := n.cache[ID]; ok {
 		return ans
 	}
