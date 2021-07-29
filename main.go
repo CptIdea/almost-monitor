@@ -28,7 +28,7 @@ func main() {
 
 	vk := vkApi.NewVK(token)
 
-	dsn := "host=akolokola.space user=mvp password=mvp dbname=almost_status port=5432"
+	dsn := "host=localhost user=mvp password=mvp dbname=almost_status port=5432"
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -45,8 +45,10 @@ func main() {
 	nameCache := nameCache2.NewNameCache(vk)
 	notificator := status_notificator.NewStatusNotificator(vk, repo, nameCache)
 
+	httpServer := api.NewHttpServer(repo)
+
 	select {
-	case err := <-api.ListenAndServe(port):
+	case err := <-api.ListenAndServe(port, httpServer):
 		log.Fatalf("выход http сервера с ошибкой: %s", err)
 
 	case err := <-scanner.Start(groupID, chatID):

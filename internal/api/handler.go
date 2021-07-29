@@ -6,10 +6,12 @@ import (
 	"strings"
 )
 
-func ListenAndServe(port string) chan error {
+func ListenAndServe(port string, server *HttpServer) chan error {
 	if !strings.HasPrefix(port, ":") {
 		port = ":" + port
 	}
+
+	http.HandleFunc("/getFromTime", server.GetFromTime)
 
 	log.Printf("запуск http сервера на порту %q", port)
 
