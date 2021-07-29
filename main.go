@@ -1,11 +1,11 @@
 package main
 
 import (
-	"almost-monitor/src/api"
-	nameCache2 "almost-monitor/src/nameCache"
-	"almost-monitor/src/repo/almost_status_repo"
-	"almost-monitor/src/status_notificator"
-	"almost-monitor/src/status_scanner"
+	"almost-monitor/internal/api"
+	nameCache2 "almost-monitor/internal/nameCache"
+	"almost-monitor/internal/repo/almost_status_repo"
+	"almost-monitor/internal/status_notificator"
+	"almost-monitor/internal/status_scanner"
 	vkApi "github.com/SevereCloud/vksdk/v2/api"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
