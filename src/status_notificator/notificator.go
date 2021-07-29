@@ -7,6 +7,7 @@ import (
 	"github.com/SevereCloud/vksdk/v2/api"
 	"github.com/SevereCloud/vksdk/v2/api/params"
 	"log"
+	"math/rand"
 	"time"
 )
 
@@ -29,6 +30,7 @@ func (s *StatusNotificator) Start(groupID int, chatID int) chan error {
 }
 
 func (s *StatusNotificator) asyncStart(groupID int, chatID int) error {
+	rand.Seed(time.Now().Unix())
 	ticker := time.NewTicker(24 * time.Hour)
 	tickerChan := ticker.C
 	errCounter := 0
@@ -55,10 +57,11 @@ func (s *StatusNotificator) asyncStart(groupID int, chatID int) error {
 		}
 		message := "Аптайм пользователей за последние 24 часа"
 		for userID, count := range counters {
-			message += fmt.Sprintf("\n%s: %d%%", s.nameCache.GetUserName(userID), (count*100)/288)
+			message += fmt.Sprintf("\n👉%s:  %s", s.nameCache.GetUserName(userID), time.Unix(int64(count*5*60), 0).Format("15:04"))
 		}
 
 		req := params.NewMessagesSendBuilder().PeerID(chatID).Message(message)
+		req.RandomID(rand.Int())
 		_, err = s.vk.MessagesSend(req.Params)
 		if err != nil {
 			errCounter++

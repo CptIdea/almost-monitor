@@ -52,9 +52,9 @@ func (a *almostStatusRepo) Get(id uint) (*pkg.AlmostStatus, error) {
 	return status, nil
 }
 
-func (a *almostStatusRepo) GetListFrom(time time.Time) ([]*pkg.AlmostStatus, error) {
+func (a *almostStatusRepo) GetListFrom(t time.Time) ([]*pkg.AlmostStatus, error) {
 	var status = make([]*pkg.AlmostStatus, 0)
-	err := a.db.Where("created_at > ?", time).Find(status).Error
+	err := a.db.Where("created_at > ?", t).Find(&status).Error
 	if err != nil {
 		return nil, err
 	}

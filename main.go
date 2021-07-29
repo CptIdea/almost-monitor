@@ -28,7 +28,7 @@ func main() {
 
 	vk := vkApi.NewVK(token)
 
-	dsn := "host=localhost user=mvp password=mvp dbname=almost_status port=5432"
+	dsn := "host=akolokola.space user=mvp password=mvp dbname=almost_status port=5432"
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
