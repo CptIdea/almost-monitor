@@ -1,8 +1,8 @@
 package status_scanner
 
 import (
+	"almost-monitor/internal/repo/almost_status_repo"
 	"almost-monitor/pkg"
-	"almost-monitor/src/repo/almost_status_repo"
 	"fmt"
 	"github.com/SevereCloud/vksdk/v2/api"
 	"github.com/SevereCloud/vksdk/v2/api/params"

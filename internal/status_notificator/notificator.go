@@ -1,8 +1,8 @@
 package status_notificator
 
 import (
-	"almost-monitor/src/nameCache"
-	"almost-monitor/src/repo/almost_status_repo"
+	"almost-monitor/internal/nameCache"
+	"almost-monitor/internal/repo/almost_status_repo"
 	"fmt"
 	"github.com/SevereCloud/vksdk/v2/api"
 	"github.com/SevereCloud/vksdk/v2/api/params"

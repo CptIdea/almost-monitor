@@ -19,6 +19,6 @@ func ListenAndServe(port string) chan error {
 		cErr <- err
 	}()
 
-	return nil
+	return cErr
 
 }
