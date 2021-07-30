@@ -45,7 +45,7 @@ func main() {
 	nameCache := nameCache2.NewNameCache(vk)
 	notificator := status_notificator.NewStatusNotificator(vk, repo, nameCache)
 
-	httpServer := api.NewHttpServer(repo)
+	httpServer := api.NewHttpServer(repo, nameCache)
 
 	select {
 	case err := <-api.ListenAndServe(port, httpServer):

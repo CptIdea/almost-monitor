@@ -1,9 +1,11 @@
 package name_cache
 
 import (
+	"almost-monitor/pkg"
 	"fmt"
 	"github.com/SevereCloud/vksdk/v2/api"
 	"github.com/SevereCloud/vksdk/v2/api/params"
+	"strings"
 	"sync"
 )
 
@@ -34,4 +36,10 @@ func (n *NameCache) GetUserName(ID int64) string {
 	}
 
 	return ""
+}
+
+func (n *NameCache) FillNames(status *pkg.AlmostStatus) {
+	for _, id := range status.Users {
+		status.UsersName = append(status.UsersName, strings.Split(n.GetUserName(id), " ")[0])
+	}
 }

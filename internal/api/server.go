@@ -1,6 +1,7 @@
 package api
 
 import (
+	"almost-monitor/internal/name_cache"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -12,11 +13,12 @@ import (
 )
 
 type HttpServer struct {
-	repo almost_status_repo.AlmostStatusRepo
+	repo      almost_status_repo.AlmostStatusRepo
+	nameCache *name_cache.NameCache
 }
 
-func NewHttpServer(repo almost_status_repo.AlmostStatusRepo) *HttpServer {
-	return &HttpServer{repo: repo}
+func NewHttpServer(repo almost_status_repo.AlmostStatusRepo, nameCache *name_cache.NameCache) *HttpServer {
+	return &HttpServer{repo: repo, nameCache: nameCache}
 }
 
 func (s *HttpServer) GetFromTime(w http.ResponseWriter, r *http.Request) {
@@ -42,6 +44,10 @@ func (s *HttpServer) GetFromTime(w http.ResponseWriter, r *http.Request) {
 		log.Printf("ошибка получения списка: %s", err)
 		s.SendError(w, err)
 		return
+	}
+
+	for i := range list {
+		s.nameCache.FillNames(list[i])
 	}
 
 	err = json.NewEncoder(w).Encode(list)

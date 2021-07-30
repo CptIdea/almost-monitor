@@ -7,5 +7,6 @@ import (
 
 type AlmostStatus struct {
 	gorm.Model
-	Users pq.Int64Array `gorm:"type:int[]"`
+	Users     pq.Int64Array `gorm:"type:int[]"`
+	UsersName []string      `gorm:"-"`
 }
