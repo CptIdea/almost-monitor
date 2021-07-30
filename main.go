@@ -2,7 +2,7 @@ package main
 
 import (
 	"almost-monitor/internal/api"
-	nameCache2 "almost-monitor/internal/nameCache"
+	nameCache2 "almost-monitor/internal/name_cache"
 	"almost-monitor/internal/repo/almost_status_repo"
 	"almost-monitor/internal/status_notificator"
 	"almost-monitor/internal/status_scanner"

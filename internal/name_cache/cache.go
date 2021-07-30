@@ -1,4 +1,4 @@
-package nameCache
+package name_cache
 
 import (
 	"fmt"

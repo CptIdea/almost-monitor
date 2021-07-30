@@ -1,7 +1,7 @@
 package status_notificator
 
 import (
-	"almost-monitor/internal/nameCache"
+	"almost-monitor/internal/name_cache"
 	"almost-monitor/internal/repo/almost_status_repo"
 	"fmt"
 	"github.com/SevereCloud/vksdk/v2/api"
@@ -14,10 +14,10 @@ import (
 type StatusNotificator struct {
 	vk        *api.VK
 	repo      almost_status_repo.AlmostStatusRepo
-	nameCache *nameCache.NameCache
+	nameCache *name_cache.NameCache
 }
 
-func NewStatusNotificator(vk *api.VK, repo almost_status_repo.AlmostStatusRepo, nameCache *nameCache.NameCache) *StatusNotificator {
+func NewStatusNotificator(vk *api.VK, repo almost_status_repo.AlmostStatusRepo, nameCache *name_cache.NameCache) *StatusNotificator {
 	return &StatusNotificator{vk: vk, repo: repo, nameCache: nameCache}
 }
 
