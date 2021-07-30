@@ -31,7 +31,7 @@ func (n *NameCache) GetUserName(ID int64) string {
 		return "UNKNOWN"
 	}
 	if len(users) > 0 {
-		n.cache[ID] = fmt.Sprint(users[0].FirstName, users[0].LastName)
+		n.cache[ID] = fmt.Sprintf("%s %s", users[0].FirstName, users[0].LastName)
 		return fmt.Sprintf("%s %s", users[0].FirstName, users[0].LastName)
 	}
 
