@@ -20,6 +20,15 @@ func NewHttpServer(repo almost_status_repo.AlmostStatusRepo) *HttpServer {
 }
 
 func (s *HttpServer) GetFromTime(w http.ResponseWriter, r *http.Request) {
+	//CORS
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET,OPTIONS")
+	if r.Method == "OPTIONS" {
+		return
+	}
+
 	err := r.ParseForm()
 	if err != nil {
 		log.Printf("ошибка парсинга формы: %s", err)
